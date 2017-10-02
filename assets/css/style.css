@@ -4,5 +4,14 @@
 
 .col-md-3 {
 	margin-top: 25px;
+	margin-bottom: 25px;
 	margin-left: 20px;
+}
+
+img {
+	padding: 10px;
+}
+
+body {
+	background-image: url(../images/triangular.png);
 }
