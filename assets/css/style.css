@@ -9,9 +9,10 @@
 }
 
 img {
-	padding: 10px;
+border: solid 2px white;
+margin: 10px;
 }
 
 body {
-	background-image: url(../images/triangular.png);
+	background-image: url(../images/dark_wood.png);
 }

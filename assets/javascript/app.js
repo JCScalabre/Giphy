@@ -1,3 +1,4 @@
+// Our initial array of animals:
 var animals = ["Cat", "Dog", "Cheetah", "Chicken", "Donkey", "Bird", "Ant", "Cow", "Otter", "Lion", "Rhinoceros", "Snake"];
 
 // Our function to render buttons of the animals array:
@@ -21,16 +22,11 @@ $("#submit").on("click", function() {
 	renderButtons();
 });
 
-renderButtons();
-
-$(document).on("click", ".animal", displaygif);
-
+// Function that displays gifs:
 function displaygif() {
 	$("#gifs").empty();
 	var animalName = $(this).attr("data-name");
-	console.log(animalName);
 	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animalName + "&api_key=dc6zaTOxFJmzC&limit=10";	
-	// var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=" + animalName;
 	$.ajax({
 		url: queryURL,
 		method: "GET"
@@ -39,21 +35,19 @@ function displaygif() {
 		for (var i = 0; i < results.length; i++) {
 			var animalDiv = $("<span>");
 			var animalImage = $("<img>");
+			// console.log(results[i].rating);
 			animalImage.attr("src", results[i].images.fixed_height_still.url);
 			animalImage.attr("data-still", results[i].images.fixed_height_still.url);
 			animalImage.attr("data-animate", results[i].images.fixed_height.url);
-			animalImage.attr("data-satte", "still");
-			console.log(results[i].images);
+			animalImage.attr("data-state", "still");
 			animalDiv.append(animalImage);
 			$("#gifs").append(animalDiv);
 		}
 	});
 }
 
-$(document).on("click", "img", imageclick);
-
+// Function for when the user clicks an image:
 function imageclick() {
-	console.log("You clicked an image");
 	var state = $(this).attr("data-state");
 	if (state === "still") {
 		$(this).attr("src", $(this).attr("data-animate"));
@@ -64,3 +58,12 @@ function imageclick() {
 
 	}
 }
+
+// When the user clicks the submit button:
+$(document).on("click", ".animal", displaygif);
+
+// When the user clicks an image:
+$(document).on("click", "img", imageclick);
+
+// Startup code:
+renderButtons();
